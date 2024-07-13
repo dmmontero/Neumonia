@@ -3,16 +3,21 @@
 
 from tkinter import *
 from tkinter import ttk, font, filedialog, Entry
+import pydicom
 
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
 from PIL import ImageTk, Image
+import tensorflow as tf
+
+# from tensorflow import keras as K
 import csv
 import pyautogui
 import tkcap
 import img2pdf
 import numpy as np
 import time
+
 tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
 import cv2
@@ -20,14 +25,17 @@ import cv2
 
 def grad_cam(array):
     img = preprocess(array)
-    model = model_fun()
+    # model = model_fun()
+    model = tf.keras.models.load_model("./models/conv_MLP_84.h5")
     preds = model.predict(img)
     argmax = np.argmax(preds[0])
     output = model.output[:, argmax]
     last_conv_layer = model.get_layer("conv10_thisone")
-    grads = K.gradients(output, last_conv_layer.output)[0]
-    pooled_grads = K.mean(grads, axis=(0, 1, 2))
-    iterate = K.function([model.input], [pooled_grads, last_conv_layer.output[0]])
+    grads = tf.keras.gradients(output, last_conv_layer.output)[0]
+    pooled_grads = tf.keras.mean(grads, axis=(0, 1, 2))
+    iterate = tf.keras.function(
+        [model.input], [pooled_grads, last_conv_layer.output[0]]
+    )
     pooled_grads_value, conv_layer_output_value = iterate(img)
     for filters in range(64):
         conv_layer_output_value[:, :, filters] *= pooled_grads_value[filters]
@@ -51,8 +59,8 @@ def predict(array):
     #   1. call function to pre-process image: it returns image in batch format
     batch_array_img = preprocess(array)
     #   2. call function to load model and predict: it returns predicted class and probability
-    model = model_fun()
-    # model_cnn = tf.keras.models.load_model('conv_MLP_84.h5')
+    # model = model_fun()
+    model = tf.keras.models.load_model("./models/conv_MLP_84.h5")
     prediction = np.argmax(model.predict(batch_array_img))
     proba = np.max(model.predict(batch_array_img)) * 100
     label = ""
@@ -68,7 +76,7 @@ def predict(array):
 
 
 def read_dicom_file(path):
-    img = dicom.read_file(path)
+    img = pydicom.read_file(path)
     img_array = img.pixel_array
     img2show = Image.fromarray(img_array)
     img2 = img_array.astype(float)
@@ -107,7 +115,7 @@ class App:
         #   BOLD FONT
         fonti = font.Font(weight="bold")
 
-        self.root.geometry("815x560")
+        self.root.geometry("900x560")
         self.root.resizable(0, 0)
 
         #   LABELS
@@ -154,18 +162,22 @@ class App:
         #   WIDGETS POSITIONS
         self.lab1.place(x=110, y=65)
         self.lab2.place(x=545, y=65)
-        self.lab3.place(x=500, y=350)
-        self.lab4.place(x=65, y=350)
+        # cédula
+        self.lab4.place(x=65, y=430)
+        # resultado
+        self.lab3.place(x=65, y=470)
         self.lab5.place(x=122, y=25)
         self.lab6.place(x=500, y=400)
-        self.button1.place(x=220, y=460)
-        self.button2.place(x=70, y=460)
-        self.button3.place(x=670, y=460)
-        self.button4.place(x=520, y=460)
-        self.button6.place(x=370, y=460)
+        self.button1.place(x=220, y=520)
+        self.button2.place(x=70, y=520)
+        self.button3.place(x=670, y=520)
+        self.button4.place(x=520, y=520)
+        self.button6.place(x=370, y=520)
         self.text1.place(x=200, y=350)
-        self.text2.place(x=610, y=350, width=90, height=30)
-        self.text3.place(x=610, y=400, width=90, height=30)
+        # cedula
+        self.text2.place(x=250, y=430, width=180, height=30)
+        # resultados
+        self.text3.place(x=250, y=470, width=180, height=30)
         self.text_img1.place(x=65, y=90)
         self.text_img2.place(x=500, y=90)
 
@@ -195,7 +207,7 @@ class App:
         )
         if filepath:
             self.array, img2show = read_dicom_file(filepath)
-            self.img1 = img2show.resize((250, 250), Image.ANTIALIAS)
+            self.img1 = img2show.resize((250, 250), Image.LANCZOS)
             self.img1 = ImageTk.PhotoImage(self.img1)
             self.text_img1.image_create(END, image=self.img1)
             self.button1["state"] = "enabled"
@@ -203,7 +215,7 @@ class App:
     def run_model(self):
         self.label, self.proba, self.heatmap = predict(self.array)
         self.img2 = Image.fromarray(self.heatmap)
-        self.img2 = self.img2.resize((250, 250), Image.ANTIALIAS)
+        self.img2 = self.img2.resize((250, 250), Image.LANCZOS)
         self.img2 = ImageTk.PhotoImage(self.img2)
         print("OK")
         self.text_img2.image_create(END, image=self.img2)
