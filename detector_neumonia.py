@@ -31,9 +31,9 @@ def grad_cam(array):
     argmax = np.argmax(preds[0])
     output = model.output[:, argmax]
     last_conv_layer = model.get_layer("conv10_thisone")
-    grads = tf.keras.gradients(output, last_conv_layer.output)[0]
-    pooled_grads = tf.keras.mean(grads, axis=(0, 1, 2))
-    iterate = tf.keras.function(
+    grads = tf.keras.backend.gradients(output, last_conv_layer.output)[0]
+    pooled_grads = tf.keras.backend.mean(grads, axis=(0, 1, 2))
+    iterate = tf.keras.backend.function(
         [model.input], [pooled_grads, last_conv_layer.output[0]]
     )
     pooled_grads_value, conv_layer_output_value = iterate(img)
@@ -163,9 +163,10 @@ class App:
         self.lab1.place(x=110, y=65)
         self.lab2.place(x=545, y=65)
         # cédula
-        self.lab4.place(x=65, y=430)
+        self.lab3.place(x=65, y=430)
         # resultado
-        self.lab3.place(x=65, y=470)
+        self.lab4.place(x=65, y=470)
+
         self.lab5.place(x=122, y=25)
         self.lab6.place(x=500, y=400)
         self.button1.place(x=220, y=520)
@@ -173,11 +174,13 @@ class App:
         self.button3.place(x=670, y=520)
         self.button4.place(x=520, y=520)
         self.button6.place(x=370, y=520)
-        self.text1.place(x=200, y=350)
-        # cedula
+        # cédula
+        self.text1.place(x=250, y=470, width=180, height=30)
+        # predicción
         self.text2.place(x=250, y=430, width=180, height=30)
         # resultados
-        self.text3.place(x=250, y=470, width=180, height=30)
+        self.text3.place(x=450, y=430, width=180, height=30)
+
         self.text_img1.place(x=65, y=90)
         self.text_img2.place(x=500, y=90)
 
@@ -209,6 +212,9 @@ class App:
             self.array, img2show = read_dicom_file(filepath)
             self.img1 = img2show.resize((250, 250), Image.LANCZOS)
             self.img1 = ImageTk.PhotoImage(self.img1)
+            self.text_img1.delete("1.0", "end")
+            self.text_img2.delete("1.0", "end")
+
             self.text_img1.image_create(END, image=self.img1)
             self.button1["state"] = "enabled"
 
@@ -217,7 +223,8 @@ class App:
         self.img2 = Image.fromarray(self.heatmap)
         self.img2 = self.img2.resize((250, 250), Image.LANCZOS)
         self.img2 = ImageTk.PhotoImage(self.img2)
-        print("OK")
+        # print("OK")
+        self.text_img2.delete("1.0", "end")
         self.text_img2.image_create(END, image=self.img2)
         self.text2.insert(END, self.label)
         self.text3.insert(END, "{:.2f}".format(self.proba) + "%")
