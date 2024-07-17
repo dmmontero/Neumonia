@@ -1,26 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from tkinter import *
-from tkinter import ttk, font, filedialog, Entry
-import pydicom
-
-from tkinter.messagebox import askokcancel, showinfo, WARNING
-import getpass
-from PIL import ImageTk, Image
-import tensorflow as tf
-
 # from tensorflow import keras as K
 import csv
-import pyautogui
-import tkcap
-import img2pdf
+import cv2
+
+# import getpass
+# import time
+from tkinter import *
+from tkinter import Entry, Tk, filedialog, font, ttk
+from tkinter.messagebox import WARNING, askokcancel, showinfo
+
+# import img2pdf
 import numpy as np
-import time
+
+# import pyautogui
+import pydicom
+import tensorflow as tf
+import tkcap
+from PIL import Image, ImageTk
 
 tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
-import cv2
 
 
 def grad_cam(array):
