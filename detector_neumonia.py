@@ -8,17 +8,18 @@ import cv2
 # import getpass
 # import time
 from tkinter import *
-from tkinter import Entry, Tk, filedialog, font, ttk
+from tkinter import Tk, filedialog, font, ttk
 from tkinter.messagebox import WARNING, askokcancel, showinfo
 
 # import img2pdf
 import numpy as np
 
 # import pyautogui
-import pydicom
 import tensorflow as tf
 import tkcap
 from PIL import Image, ImageTk
+
+from src.read_img import Imagen
 
 tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
@@ -74,27 +75,6 @@ def predict(array):
     #   3. call function to generate Grad-CAM: it returns an image with a superimposed heatmap
     heatmap = grad_cam(array)
     return (label, proba, heatmap)
-
-
-def read_dicom_file(path):
-    img = pydicom.read_file(path)
-    img_array = img.pixel_array
-    img2show = Image.fromarray(img_array)
-    img2 = img_array.astype(float)
-    img2 = (np.maximum(img2, 0) / img2.max()) * 255.0
-    img2 = np.uint8(img2)
-    img_RGB = cv2.cvtColor(img2, cv2.COLOR_GRAY2RGB)
-    return img_RGB, img2show
-
-
-def read_jpg_file(path):
-    img = cv2.imread(path)
-    img_array = np.asarray(img)
-    img2show = Image.fromarray(img_array)
-    img2 = img_array.astype(float)
-    img2 = (np.maximum(img2, 0) / img2.max()) * 255.0
-    img2 = np.uint8(img2)
-    return img2, img2show
 
 
 def preprocess(array):
@@ -210,7 +190,8 @@ class App:
             ),
         )
         if filepath:
-            self.array, img2show = read_dicom_file(filepath)
+            self.array, img2show = Imagen.read_dicom_file(filepath)
+            # self.array, img2show = read_dicom_file(filepath)
             self.img1 = img2show.resize((250, 250), Image.LANCZOS)
             self.img1 = ImageTk.PhotoImage(self.img1)
             self.text_img1.delete("1.0", "end")
