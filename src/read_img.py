@@ -5,9 +5,17 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 
 
-class Imagen:
+class Imagen(object):
     @classmethod
     def read_dicom_file(self, path):
+        """_summary_
+
+        Args:
+            path (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         img = pydicom.read_file(path)
         img_array = img.pixel_array
         img2show = Image.fromarray(img_array)
@@ -18,7 +26,15 @@ class Imagen:
         return img_RGB, img2show
 
     @classmethod
-    def read_jpg_file(path):
+    def read_jpg_file(self, path):
+        """_summary_
+
+        Args:
+            path (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         img = cv2.imread(path)
         img_array = np.asarray(img)
         img2show = Image.fromarray(img_array)
@@ -29,6 +45,11 @@ class Imagen:
 
     @classmethod
     def load_img_file(self):
+        """_summary_
+
+        Returns:
+            _type_: _description_
+        """
         filepath = filedialog.askopenfilename(
             initialdir="/",
             title="Select image",
