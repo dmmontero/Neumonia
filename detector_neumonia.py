@@ -93,6 +93,15 @@ class App:
         self.text_img1.place(x=65, y=90)
         self.text_img2.place(x=500, y=90)
 
+        # Progress bar widget
+        # self.progress_bar = ttk.Progressbar(
+        #     self.root,
+        #     orient=HORIZONTAL,
+        #     length=500,
+        #     mode="indeterminate",
+        # )
+        # self.progress_bar.place(y=600, x=70)
+
         #   FOCUS ON PATIENT ID
         self.text1.focus_set()
 
