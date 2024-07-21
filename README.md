@@ -23,8 +23,8 @@ Requerimientos necesarios para el funcionamiento:
 
 - Abra Anaconda Prompt y ejecute las siguientes instrucciones:
   
-1. Crea un ambiente virtual con la verion 3.11 de Python
-_conda create -n neumonia python=3.11_
+1. Crea un ambiente virtual con la verion 3.11 de Python\
+  _conda create -n neumonia python=3.11_
 
 2. Activar el ambiente virtual:\
   _conda activate neumonia_
