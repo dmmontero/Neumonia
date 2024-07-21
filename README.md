@@ -12,31 +12,36 @@ Aplicación de una técnica de explicación llamada Grad-CAM para resaltar con u
 
 ---
 
-## Uso de la herramienta:
+## Uso de la herramienta
 
 A continuación le explicaremos cómo empezar a utilizarla.
 
 Requerimientos necesarios para el funcionamiento:
 
 - Instale Anaconda para Windows siguiendo las siguientes instrucciones:
-  https://docs.anaconda.com/anaconda/install/windows/
+  <https://docs.anaconda.com/anaconda/install/windows/>
 
 - Abra Anaconda Prompt y ejecute las siguientes instrucciones:
+  
+  -Crea un ambiente virtual con la verion 3.11 de Python
+  conda create -n neumonia python=3.11
 
-  conda create -n tf tensorflow
+  -Activar el ambiente virtual
+  _conda activate neumonia_
 
-  conda activate tf
+  -Ir a la carpeta del proyecto
+  _cd Neumonia_
 
-  cd UAO-Neumonia
+  -Intalar los paquetes dfinidos para el proyecto
+  _pip install -r requirements.txt_
 
-  pip install -r requirements.txt
-
-  python detector_neumonia.py
+  -Ejecutar el proyecto
+  _python detector_neumonia.py_
 
 Uso de la Interfaz Gráfica:
 
 - Ingrese la cédula del paciente en la caja de texto
-- Presione el botón 'Cargar Imagen', seleccione la imagen del explorador de archivos del computador (Imagenes de prueba en https://drive.google.com/drive/folders/1WOuL0wdVC6aojy8IfssHcqZ4Up14dy0g?usp=drive_link)
+- Presione el botón 'Cargar Imagen', seleccione la imagen del explorador de archivos del computador (Imagenes de prueba en <https://drive.google.com/drive/folders/1WOuL0wdVC6aojy8IfssHcqZ4Up14dy0g?usp=drive_link>)
 - Presione el botón 'Predecir' y espere unos segundos hasta que observe los resultados
 - Presione el botón 'Guardar' para almacenar la información del paciente en un archivo excel con extensión .csv
 - Presione el botón 'PDF' para descargar un archivo PDF con la información desplegada en la interfaz
@@ -44,7 +49,7 @@ Uso de la Interfaz Gráfica:
 
 ---
 
-## Arquitectura de archivos propuesta.
+## Arquitectura de archivos propuesta
 
 ## detector_neumonia.py
 
@@ -99,7 +104,7 @@ Es una técnica utilizada para resaltar las regiones de una imagen que son impor
 
 Grad-CAM realiza el cálculo del gradiente de la salida correspondiente a la clase a visualizar con respecto a las neuronas de una cierta capa de la CNN. Esto permite tener información de la importancia de cada neurona en el proceso de decisión de esa clase en particular. Una vez obtenidos estos pesos, se realiza una combinación lineal entre el mapa de activaciones de la capa y los pesos, de esta manera, se captura la importancia del mapa de activaciones para la clase en particular y se ve reflejado en la imagen de entrada como un mapa de calor con intensidades más altas en aquellas regiones relevantes para la red con las que clasificó la imagen en cierta categoría.
 
-## Proyecto original realizado por:
+## Proyecto original realizado por
 
-Isabella Torres Revelo - https://github.com/isa-tr
-Nicolas Diaz Salazar - https://github.com/nicolasdiazsalazar
+Isabella Torres Revelo - <https://github.com/isa-tr>
+Nicolas Diaz Salazar - <https://github.com/nicolasdiazsalazar>
