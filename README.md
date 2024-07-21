@@ -23,19 +23,19 @@ Requerimientos necesarios para el funcionamiento:
 
 - Abra Anaconda Prompt y ejecute las siguientes instrucciones:
   
-  -Crea un ambiente virtual con la verion 3.11 de Python
-  conda create -n neumonia python=3.11
+1. Crea un ambiente virtual con la verion 3.11 de Python
+_conda create -n neumonia python=3.11_
 
-  -Activar el ambiente virtual
+2. Activar el ambiente virtual:\
   _conda activate neumonia_
 
-  -Ir a la carpeta del proyecto
-  _cd Neumonia_
+3. Ir a la carpeta del proyecto:\
+   _cd Neumonia_
 
-  -Intalar los paquetes dfinidos para el proyecto
+4. Intalar los paquetes dfinidos para el proyecto:\
   _pip install -r requirements.txt_
 
-  -Ejecutar el proyecto
+5. Ejecutar el proyecto:\
   _python detector_neumonia.py_
 
 Uso de la Interfaz Gráfica:
