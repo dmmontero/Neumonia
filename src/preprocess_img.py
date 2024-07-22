@@ -3,10 +3,25 @@ import numpy as np
 
 
 class PreprocessImg(object):
-    """docstring for PreprocssImg."""
+    """_summary_
+
+    Args:
+        object (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
 
     @classmethod
     def preprocess(self, array):
+        """_summary_
+
+        Args:
+            array (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         array = cv2.resize(array, (512, 512))
         array = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))

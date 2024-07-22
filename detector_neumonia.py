@@ -17,6 +17,8 @@ from src.integrator import Integrator
 
 
 class App:
+    """_summary_"""
+
     def __init__(self):
         self.root = Tk()
         self.root.title("Herramienta para la detección rápida de neumonía")
@@ -116,6 +118,7 @@ class App:
 
     #   METHODS
     def load_img_file(self):
+        """_summary_"""
         filepath = filedialog.askopenfilename(
             initialdir="/",
             title="Select image",
@@ -139,6 +142,7 @@ class App:
             self.button1["state"] = "enabled"
 
     def run_model(self):
+        """_summary_"""
         self.text2.delete("1.0", "end")
         self.text3.delete("1.0", "end")
         self.label, self.proba, self.heatmap = Integrator.predict(self.array)
@@ -153,6 +157,7 @@ class App:
         self.button1["state"] = "disabled"
 
     def save_results_csv(self):
+        """_summary_"""
         with open("./reportes/historial.csv", "a") as csvfile:
             w = csv.writer(csvfile, delimiter="-")
             w.writerow(
@@ -161,6 +166,7 @@ class App:
             showinfo(title="Guardar", message="Los datos se guardaron con éxito.")
 
     def create_pdf(self):
+        """_summary_"""
         cap = tkcap.CAP(self.root)
         ID = "./reportes/Reporte" + str(self.reportID) + ".jpg"
         img = cap.capture(ID, overwrite=True)
@@ -172,6 +178,7 @@ class App:
         showinfo(title="PDF", message="El PDF fue generado con éxito.")
 
     def delete(self):
+        """_summary_"""
         answer = askokcancel(
             title="Confirmación", message="Se borrarán todos los datos.", icon=WARNING
         )
@@ -185,6 +192,11 @@ class App:
 
 
 def main():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     my_app = App()
     return 0
 

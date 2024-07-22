@@ -6,10 +6,25 @@ from src.preprocess_img import PreprocessImg
 
 
 class Integrator(object):
-    """docstring for Integrator."""
+    """_summary_
+
+    Args:
+        object (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
 
     @classmethod
     def predict(self, array):
+        """_summary_
+
+        Args:
+            array (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         #   1. call function to pre-process image: it returns image in batch format
         batch_array_img = PreprocessImg.preprocess(array)
         #   2. call function to load model and predict: it returns predicted class and probability

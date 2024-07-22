@@ -10,10 +10,25 @@ tf.compat.v1.experimental.output_all_intermediates(True)
 
 
 class GradientCam(object):
-    """docstring for GradientCam."""
+    """_summary_
+
+    Args:
+        object (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
 
     @classmethod
     def grad_cam(self, array):
+        """_summary_
+
+        Args:
+            array (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         img = PreprocessImg.preprocess(array)
         # model = model_fun()
         _model = Model()
