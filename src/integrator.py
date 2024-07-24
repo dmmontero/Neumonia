@@ -6,24 +6,19 @@ from src.preprocess_img import PreprocessImg
 
 
 class Integrator(object):
-    """_summary_
-
-    Args:
-        object (_type_): _description_
-
-    Returns:
-        _type_: _description_
+    """
+    Integra las clases y retorna solamente lo necesario para ser visualizado en la interfaz gráfica.
     """
 
     @classmethod
     def predict(self, array):
-        """_summary_
+        """Ejecuta la predcio con base en la imagen enviada
 
         Args:
-            array (_type_): _description_
+            array (_type_): Imagen leida
 
         Returns:
-            _type_: _description_
+            _type_: predicción, probabilidad, imágen el mapa de calor generado por Grad-CAM..
         """
         #   1. call function to pre-process image: it returns image in batch format
         batch_array_img = PreprocessImg.preprocess(array)

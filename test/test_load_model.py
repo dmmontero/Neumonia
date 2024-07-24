@@ -3,6 +3,10 @@ import unittest
 
 
 class TestImagen(unittest.TestCase):
+    """
+    Caso de prueba carga modelo
+    """
+
     def setUp(self):
         self.model = Model()
 

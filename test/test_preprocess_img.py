@@ -7,11 +7,16 @@ from src.read_img import Imagen
 
 
 class TestPreprocessImg(unittest.TestCase):
+    """
+    Caso de prueba pre-procesamiento imágen
+    """
+
     def setUp(self):
         self.preprocess = PreprocessImg()
         self.imagen = Imagen()
 
     def test_preprocess(self):
+        # TODO: Debe seleccionar la ruta donde se encuentra la imágen
         arreglo, img = self.imagen.read_dicom_file(
             "c:\\Users\\Tatiana\\Downloads\\DICOM\\normal (3).dcm"
         )

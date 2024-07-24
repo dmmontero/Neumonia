@@ -6,15 +6,17 @@ from PIL import Image, ImageTk
 
 
 class Imagen(object):
+    # Clase usada para la lectura de archivos
+
     @classmethod
     def read_dicom_file(self, path):
-        """_summary_
+        """Leer una imagen en formato dicom
 
         Args:
-            path (_type_): _description_
+            path (_type_): ruta de la imagen
 
         Returns:
-            _type_: _description_
+            _type_: imagen  en memoria
         """
         img = pydicom.read_file(path)
         img_array = img.pixel_array
@@ -27,13 +29,14 @@ class Imagen(object):
 
     @classmethod
     def read_jpg_file(self, path):
-        """_summary_
+        """Leer una imagen en formato dicom
+
 
         Args:
-            path (_type_): _description_
+            path (_type_): ruta a la imagen
 
         Returns:
-            _type_: _description_
+            _type_: iamgen leida
         """
         img = cv2.imread(path)
         img_array = np.asarray(img)
@@ -45,10 +48,10 @@ class Imagen(object):
 
     @classmethod
     def load_img_file(self):
-        """_summary_
+        """Depliega el dialogo para seleccionar una imagen
 
         Returns:
-            _type_: _description_
+            represetacion de ls imágen seleccionada
         """
         filepath = filedialog.askopenfilename(
             initialdir="/",

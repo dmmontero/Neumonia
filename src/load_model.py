@@ -5,16 +5,16 @@ tf.compat.v1.experimental.output_all_intermediates(True)
 
 
 class Model(object):
-    """_summary_
-
-    Returns:
-        _type_: _description_
+    """
+    Carga el modelo, cabe a notar que este modelo debe caragrse en la carpeta models,
+    este no se sube a Git dado su tamaño.
     """
 
     __instance = None
 
     def __new__(cls):
-        """_summary_
+        """El modelo se implementa aplicando el patron de diseño Sigleton.
+        el modelo se ee de la carpeta modelos
 
         Returns:
             _type_: _description_
@@ -26,10 +26,10 @@ class Model(object):
 
     @property
     def load(self):
-        """_summary_
+        """Retorna el modelo caraga e implementa un lazy apra evitar sobrecarga.
 
         Returns:
-            _type_: _description_
+            _type_: Modelo
         """
         if not hasattr(self, "_model"):
             self._model = tf.keras.models.load_model("./models/conv_MLP_84.h5")

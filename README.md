@@ -1,12 +1,12 @@
-## Hola! Bienvenido a la herramienta para la detección rápida de neumonía
+# Hola! Bienvenido a la herramienta para la detección rápida de neumonía
 
 Deep Learning aplicado en el procesamiento de imágenes radiográficas de tórax en formato DICOM con el fin de clasificarlas en 3 categorías diferentes:
 
-1. Neumonía Bacteriana
+1. Neumonía Bacteriana (**bacterina**)
 
-2. Neumonía Viral
+2. Neumonía Viral (**normal**)
 
-3. Sin Neumonía
+3. Sin Neumonía (**viral**)
 
 Aplicación de una técnica de explicación llamada Grad-CAM para resaltar con un mapa de calor las regiones relevantes de la imagen de entrada.
 
@@ -22,21 +22,21 @@ Requerimientos necesarios para el funcionamiento:
   <https://docs.anaconda.com/anaconda/install/windows/>
 
 - Abra Anaconda Prompt y ejecute las siguientes instrucciones:
-  
+
 1. Crea un ambiente virtual con la versión 3.11 de Python\
-  _conda create -n neumonia python=3.11_
+   _conda create -n neumonia python=3.11_
 
 2. Activar el ambiente virtual creado:\
-  _conda activate neumonia_
+   _conda activate neumonia_
 
 3. Ir a la carpeta del proyecto:\
    _cd Neumonia_
 
-4. Intalar los paquetes dfinidos para el proyecto:\
-  _pip install -r requirements.txt_
+4. Instalar los paquetes definidos para el proyecto:\
+   _pip install -r requirements.txt_
 
 5. Ejecutar el proyecto:\
-  _python detector_neumonia.py_
+   _python detector_neumonia.py_
 
 Uso de la Interfaz Gráfica:
 
@@ -53,19 +53,25 @@ Uso de la Interfaz Gráfica:
 
 El proyecto puede se ejecutado desde una Imagen Docker, para ello debe ejecutar los siguientes pasos:
 
- 1. Crear la imagen Docker:
-    Una vez se encuentre en la raiiz del proyecto ejecuta el siguiente comando recrear la imágen
-    _docker build -t neumonia_detector ._  
+1. Crear la imagen Docker:
+   Una vez se encuentre en la raiiz del proyecto ejecuta el siguiente comando para crear la imágen
 
- 2. Ejecutar  la imagen Docker:
-    Debe tener en cuenta que el sistema debe contar con un servidor XWindows activo en en nuestro caso ejecutamos
-    la prueba en ambiente Windows e instalamos Xming el cual puede descargarse en: <https://sourceforge.net/projects/xming/>
-    _docker run -it -e DISPLAY="host.docker.internal:0.0"  -v "c:\DICOM\:/downloads" neumonia_detector_
-    Tener en cuenta el parámetro -v el cual nos permite cargar las imágenes de prueba en el sistema de archivos de la imágen (carpeta download en este caso), el parametro -e que nos permite exportar el display.
+   **docker build -t neumonia_detector .**
+
+2. Ejecutar la imagen Docker:
+   Debe tener en cuenta que el sistema debe contar con un servidor XWindows activo en en nuestro caso ejecutamos
+   la prueba en ambiente Windows e instalamos Xming el cual puede descargarse en: <https://sourceforge.net/projects/xming/>
+
+   **docker run -it -e DISPLAY="host.docker.internal:0.0" -v "c:\DICOM\:/downloads" neumonia_detector**
+
+   Tener en cuenta el parámetro -v el cual nos permite cargar las imágenes de prueba en el sistema de archivos de la imágen (carpeta download en este caso), el parametro -e que nos permite exportar el display.
 
 ---
 
 ## Arquitectura de archivos propuesta
+
+Los archivos se encuentra dentro de la carpeta **src** a excepcion del _detector_neumonia.py_
+que es el punto de entra de la app y se encuenta en la raíz del proyecto.
 
 ## detector_neumonia.py
 
@@ -126,7 +132,7 @@ Grad-CAM realiza el cálculo del gradiente de la salida correspondiente a la cla
 
 En la carpeta **test** del proyecto se encuentra los casos de prueba creados con **unittest** para ejecutar un caso de prueba específico ejecute el siguiente comando:
 
-**python -m unittest discover .\test test_load_model.py**
+**_python -m unittest discover .\test test_load_model.py_**
 
 Donde _test_load_model.py_ en el archivo que contiene la prueba este comando ejectar todas las pruebas creadas.
 
@@ -137,6 +143,6 @@ Donde _test_load_model.py_ en el archivo que contiene la prueba este comando eje
 Isabella Torres Revelo - <https://github.com/isa-tr>\
 Nicolas Diaz Salazar - <https://github.com/nicolasdiazsalazar>
 
-## Modificado  por
+## Modificado por
 
- Danny Mauricio Montero - <http://github.com/dmmontero>
+**Danny Mauricio Montero - <http://github.com/dmmontero>**

@@ -7,11 +7,16 @@ from src.read_img import Imagen
 
 
 class TestIntegrator(unittest.TestCase):
+    """
+    Caso prueba Integrador
+    """
+
     def setUp(self):
         self.integrator = Integrator()
         self.imagen = Imagen()
 
     def test_predict(self):
+        # TODO: Debe seleccionar la ruta donde se encuentra la imágen
         arreglo, img = self.imagen.read_dicom_file(
             "c:\\Users\\Tatiana\\Downloads\\DICOM\\normal (2).dcm"
         )

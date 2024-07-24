@@ -3,24 +3,25 @@ import numpy as np
 
 
 class PreprocessImg(object):
-    """_summary_
-
-    Args:
-        object (_type_): _description_
-
-    Returns:
-        _type_: _description_
+    """
+    Recibe el arreglo que represennta la imágen y aplica procesamiento a este
     """
 
     @classmethod
     def preprocess(self, array):
-        """_summary_
+        """Recibe el arreglo que represeta la imagen y realiza las siguientes modificaciones:
+        - resize a 512x512
+        - conversión a escala de grises
+        - ecualización del histograma con CLAHE
+        - normalización de la imagen entre 0 y 1
+        - conversión del arreglo de imagen a formato de batch (tensor)
+
 
         Args:
-            array (_type_): _description_
+            array (_type_): Imagen
 
         Returns:
-            _type_: _description_
+            _type_: Imagen preprocesada
         """
         array = cv2.resize(array, (512, 512))
         array = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
