@@ -100,7 +100,10 @@ Script que recibe el arreglo proveniento de read_img.py, realiza las siguientes 
 
 ## load_model.py
 
-Script que lee el archivo binario del modelo de red neuronal convolucional previamente entrenado llamado 'WilhemNet86.h5'.
+Script que lee el archivo binario del modelo de red neuronal convolucional previamente entrenado llamado **'conv_MLP_84.h5.h5'**.
+el cual debe cargarse a la carpeta modelos y se puede descaragar aqui:
+
+**<https://drive.google.com/file/d/18rgX66x7eMHci0bAimoycCe8BQLjBWK_/view?usp=sharing>**
 
 ## grad_cam.py
 
@@ -119,6 +122,10 @@ Con 16, 32, 48, 64 y 80 filtros de 3x3 para cada bloque respectivamente.
 Después de cada bloque convolucional se encuentra una capa de max pooling y después de la última una capa de Average Pooling seguida por tres capas fully-connected (Dense) de 1024, 1024 y 3 neuronas respectivamente.
 
 Para regularizar el modelo utilizamos 3 capas de Dropout al 20%; dos en los bloques 4 y 5 conv y otra después de la 1ra capa Dense.
+
+El modelo puede descargarse aquí:
+
+**<https://drive.google.com/file/d/18rgX66x7eMHci0bAimoycCe8BQLjBWK_/view?usp=sharing>**
 
 ## Acerca de Grad-CAM
 
