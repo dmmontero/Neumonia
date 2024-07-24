@@ -23,10 +23,10 @@ Requerimientos necesarios para el funcionamiento:
 
 - Abra Anaconda Prompt y ejecute las siguientes instrucciones:
   
-1. Crea un ambiente virtual con la verion 3.11 de Python\
+1. Crea un ambiente virtual con la versión 3.11 de Python\
   _conda create -n neumonia python=3.11_
 
-2. Activar el ambiente virtual:\
+2. Activar el ambiente virtual creado:\
   _conda activate neumonia_
 
 3. Ir a la carpeta del proyecto:\
@@ -40,12 +40,28 @@ Requerimientos necesarios para el funcionamiento:
 
 Uso de la Interfaz Gráfica:
 
-- Ingrese la cédula del paciente en la caja de texto
+- Ingrese la cédula del paciente en la caja de texto (opcional)
 - Presione el botón 'Cargar Imagen', seleccione la imagen del explorador de archivos del computador (Imagenes de prueba en <https://drive.google.com/drive/folders/1WOuL0wdVC6aojy8IfssHcqZ4Up14dy0g?usp=drive_link>)
 - Presione el botón 'Predecir' y espere unos segundos hasta que observe los resultados
 - Presione el botón 'Guardar' para almacenar la información del paciente en un archivo excel con extensión .csv
 - Presione el botón 'PDF' para descargar un archivo PDF con la información desplegada en la interfaz
 - Presión el botón 'Borrar' si desea cargar una nueva imagen
+
+---
+
+## Imágen Docker
+
+El proyecto puede se ejecutado desde una Imagen Docker, para ello debe ejecutar los siguientes pasos:
+
+ 1. Crear la imagen Docker:
+    Una vez se encuentre en la raiiz del proyecto ejecuta el siguiente comando recrear la imágen
+    _docker build -t neumonia_detector ._  
+
+ 2. Ejecutar  la imagen Docker:
+    Debe tener en cuenta que el sistema debe contar con un servidor XWindows activo en en nuestro caso ejecutamos
+    la prueba en ambiente Windows e instalamos Xming el cual puede descargarse en: <https://sourceforge.net/projects/xming/>
+    _docker run -it -e DISPLAY="host.docker.internal:0.0"  -v "c:\DICOM\:/downloads" neumonia_detector_
+    Tener en cuenta el parámetro -v el cual nos permite cargar las imágenes de prueba en el sistema de archivos de la imágen (carpeta download en este caso), el parametro -e que nos permite exportar el display.
 
 ---
 
@@ -104,7 +120,23 @@ Es una técnica utilizada para resaltar las regiones de una imagen que son impor
 
 Grad-CAM realiza el cálculo del gradiente de la salida correspondiente a la clase a visualizar con respecto a las neuronas de una cierta capa de la CNN. Esto permite tener información de la importancia de cada neurona en el proceso de decisión de esa clase en particular. Una vez obtenidos estos pesos, se realiza una combinación lineal entre el mapa de activaciones de la capa y los pesos, de esta manera, se captura la importancia del mapa de activaciones para la clase en particular y se ve reflejado en la imagen de entrada como un mapa de calor con intensidades más altas en aquellas regiones relevantes para la red con las que clasificó la imagen en cierta categoría.
 
+---
+
+## Test Cases
+
+En la carpeta **test** del proyecto se encuentra los casos de prueba creados con **unittest** para ejecutar un caso de prueba específico ejecute el siguiente comando:
+
+**python -m unittest discover .\test test_load_model.py**
+
+Donde _test_load_model.py_ en el archivo que contiene la prueba este comando ejectar todas las pruebas creadas.
+
+---
+
 ## Proyecto original realizado por
 
-Isabella Torres Revelo - <https://github.com/isa-tr>
+Isabella Torres Revelo - <https://github.com/isa-tr>\
 Nicolas Diaz Salazar - <https://github.com/nicolasdiazsalazar>
+
+## Modificado  por
+
+ Danny Mauricio Montero - <http://github.com/dmmontero>

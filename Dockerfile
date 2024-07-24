@@ -7,9 +7,6 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
-ENV DISPLAY = 172.25.112.1:0.0
-
-
 
 # Install pip requirements
 RUN apt-get update && apt-get install -y libgl1-mesa-glx

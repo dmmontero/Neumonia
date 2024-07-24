@@ -30,9 +30,7 @@ class GradientCam(object):
             _type_: _description_
         """
         img = PreprocessImg.preprocess(array)
-        # model = model_fun()
         _model = Model()
-        # model = tf.keras.models.load_model("./models/conv_MLP_84.h5")
         model = _model.load
         preds = model.predict(img)
         argmax = np.argmax(preds[0])

@@ -4,7 +4,7 @@ tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
 
 
-class Model:
+class Model(object):
     """_summary_
 
     Returns:
