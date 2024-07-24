@@ -21,7 +21,7 @@ class App:
 
     def __init__(self):
         self.root = Tk()
-        self.root.title("Herramienta para la detección rápida de neumonía")
+        self.root.title("Herramienta para la deteccion rapida de neumonia")
 
         #   BOLD FONT
         fonti = font.Font(weight="bold")
