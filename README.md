@@ -64,7 +64,9 @@ El proyecto puede se ejecutado desde una Imagen Docker, para ello debe ejecutar 
 
    **docker run -it -e DISPLAY="host.docker.internal:0.0" -v "c:\DICOM\:/downloads" neumonia_detector**
 
-   Tener en cuenta el parámetro -v el cual nos permite cargar las imágenes de prueba en el sistema de archivos de la imágen (carpeta download en este caso), el parametro -e que nos permite exportar el display.
+   Tener en cuenta el parámetro **-v** ( de volumnen) el cual nos permite cargar archivos de sistema actual (c:\DICOM) en el sistema de archivos de la imágen (carpeta download en este caso), el parametro -e que nos permite exportar el display.
+
+   Debe por tanto mapear la carpeta que contenga las imágenes de prueba para cargarlas al sistema de archivo de la imágen.
 
 ---
 
